@@ -1,0 +1,26 @@
+﻿@{
+    DateTime myTime = DateTime.Now;
+}
+@model ChatMVCCore.Models.MessageModel
+<div class="justify-content-center text-center w-50">
+    <div class="messageBox">
+        <div class="float-left">
+            <ul>
+                @foreach (var item in Model.MessageDetails.MessageContent)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+            <p>test incoming message</p>
+        </div>
+        <div class="float-right">
+            <ul>
+                @foreach (var item in Model.MessageDetails.MessageContent)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+            <p>test outgoing message</p>
+        </div>
+    </div>
+</div>
