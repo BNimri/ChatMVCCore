@@ -1,4 +1,5 @@
 using ChatMVCCore.Data;
+using ChatMVCCore.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,11 @@ namespace ChatMVCCore
             services.AddDbContext<MessageContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
 
+            services.AddControllers().AddJsonOptions(options => 
+            options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+            services.AddSignalR();
+
             services.AddControllersWithViews();
         }
 
@@ -57,6 +63,8 @@ namespace ChatMVCCore
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHub<SignalRHub>("/SignalRHub");
             });
         }
     }
