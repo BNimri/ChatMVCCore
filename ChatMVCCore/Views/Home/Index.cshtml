@@ -1,35 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-@model ChatMVCCore.Models.MessageModel
-<body style="background-color:lightgrey">
-    @using (Html.BeginForm("SaveMessage", "Home", FormMethod.Post))
-    {
-        <div class="container p-2 shadow" style="background-color:white">
-            <form>
-                <table class="table table-bordered border-danger align-content-center">
-                    <tr>
-                        <td>Sender:</td>
-                        <td>@Html.TextBoxFor(x => x.Sender)</td>
-                    </tr>
-                    <tr>
-                        <td>Message:</td>
-                        <td>@Html.TextBoxFor(x => x.MessageDetails.MessageContent)</td>
-                    </tr>
-                    <tr>
-                        <td>Message Type:</td>
-                        <td>@Html.TextBoxFor(x => x.MessageDetails.MessageType)</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"> <input type="submit" value="Send" name="SendMessage" id="SendMessage"/> </td>                        
-                    </tr>
-                </table>
-            </form>
-            <br>
-            <hr>
-            <br>
+﻿@model ChatMVCCore.Models.MessageModel
+<head>
+    <script src="~/js/Chat.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+</head>
 
-            @Html.RenderPartialAsync("_ChatBox");
-        </div>
-    }
+<body style="background-color:lightgrey">
+    <div class="container p-2 shadow" style="background-color:white">
+        <form>
+            <table class="table table-bordered border-danger align-content-center">
+                <tr>
+                    <td>Sender:</td>
+                    <td colspan="2">@Html.TextBoxFor(x => x.Sender, new { id = "senderName"})</td>
+                </tr>
+                <tr>
+                    <td colspan="3">@{await Html.RenderPartialAsync("_ChatBox");}</td>
+                </tr>
+                <tr>
+                    <td>Message:</td>
+                    <td>@Html.TextBoxFor(x => x.MessageDetails.MessageContent, new { id = "messageContent"}) </td>
+                    <td><input type="button" value="Send" id="SendMessage" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>

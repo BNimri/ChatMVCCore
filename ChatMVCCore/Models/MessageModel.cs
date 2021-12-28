@@ -10,6 +10,5 @@ namespace ChatMVCCore.Models
         public string Receiver { set; get; }
         public MessageDetailsModel MessageDetails { set; get; }
 
-
     }
 }

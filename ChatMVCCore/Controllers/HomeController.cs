@@ -1,6 +1,8 @@
 ﻿using ChatMVCCore.Data;
+using ChatMVCCore.Hubs;
 using ChatMVCCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,7 +27,6 @@ namespace ChatMVCCore.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<IActionResult> Index([Bind("Sender,Receiver,MessageDetails")] MessageModel msgModel)
         {
@@ -38,7 +39,6 @@ namespace ChatMVCCore.Controllers
 
             return View(msgModel);
         }
-
 
 
         [HttpGet]
